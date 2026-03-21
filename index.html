@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ömer Arslan's Homepage</title>
+<meta name="description" content="Full-stack developer building developer tools and open-source infrastructure.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%232563eb'/><text x='32' y='42' font-family='Georgia,serif' font-size='28' font-weight='600' fill='white' text-anchor='middle'>OA</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #fff;
+  --bg-soft: #f8f8f8;
+  --text: #222;
+  --text-mid: #555;
+  --text-muted: #888;
+  --text-faint: #bbb;
+  --accent: #2563eb;
+  --accent-soft: rgba(37,99,235,.06);
+  --border: #eee;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Source Sans 3', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="dark"] {
+  --bg: #141414;
+  --bg-soft: #1e1e1e;
+  --text: #e4e4e4;
+  --text-mid: #aaa;
+  --text-muted: #777;
+  --text-faint: #4a4a4a;
+  --accent: #5b9ff5;
+  --accent-soft: rgba(91,159,245,.1);
+  --border: #2a2a2a;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+  font-size: 15px;
+}
+::selection { background: var(--accent); color: #fff; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Layout */
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+/* Profile header */
+.profile {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  align-items: start;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+}
+.profile-info h1 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.profile-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+}
+.profile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+.profile-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-mid);
+  transition: color .15s;
+}
+.profile-links a:hover { color: var(--accent); text-decoration: none; }
+.profile-links .link-icon {
+  width: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-faint);
+}
+.profile-follow {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.profile-follow a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  padding: 5px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  transition: all .15s;
+}
+.profile-follow a:hover {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* About */
+.about {
+  padding: 36px 0;
+}
+.about h2 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.about p {
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 12px;
+  max-width: 640px;
+}
+
+/* Sections */
+.section {
+  padding: 36px 0;
+  border-top: 1px solid var(--border);
+}
+.section h2 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* OSS table */
+.oss-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.oss-table tr {
+  border-bottom: 1px solid var(--border);
+  transition: background .15s;
+}
+.oss-table tr:last-child { border-bottom: none; }
+.oss-table tr:hover { background: var(--bg-soft); }
+.oss-table td {
+  padding: 14px 12px;
+  vertical-align: top;
+}
+.oss-table td:first-child { padding-left: 0; }
+.oss-table td:last-child { padding-right: 0; }
+.oss-name-cell a {
+  font-weight: 600;
+  color: var(--text);
+}
+.oss-name-cell a:hover { color: var(--accent); }
+.oss-desc-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.oss-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  white-space: nowrap;
+}
+.oss-stars {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text-faint);
+  white-space: nowrap;
+  text-align: right;
+}
+
+/* Project card */
+.project-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.project-card:hover {
+  border-color: #ddd;
+  box-shadow: 0 2px 12px rgba(0,0,0,.04);
+}
+.project-card h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.project-card h3 a { color: var(--text); }
+.project-card h3 a:hover { color: var(--accent); text-decoration: none; }
+.project-card p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.project-arch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.arch-item {
+  padding: 12px;
+  background: var(--bg-soft);
+  border-radius: 8px;
+  font-size: 12px;
+}
+.arch-item strong {
+  display: block;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+.arch-item span {
+  color: var(--text-mid);
+}
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.project-tech span {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--bg-soft);
+  color: var(--text-muted);
+}
+
+/* Stack */
+.stack-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px 24px;
+  font-size: 14px;
+}
+.stack-cat {
+  font-weight: 500;
+  color: var(--text);
+  padding-top: 2px;
+}
+.stack-val {
+  color: var(--text-mid);
+  line-height: 1.8;
+}
+
+/* Footer */
+.footer {
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .profile {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .profile-photo {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+  .profile-links { align-items: center; }
+  .profile-follow { justify-content: center; }
+  .project-arch-grid { grid-template-columns: 1fr 1fr; }
+  .stack-grid { grid-template-columns: 1fr; gap: 4px 0; }
+  .stack-cat { margin-top: 8px; }
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 100;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all .25s;
+  color: var(--text-muted);
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon { position: absolute; transition: opacity .25s, transform .25s; }
+.theme-toggle .icon-sun { opacity: 1; transform: rotate(0); }
+.theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg); }
+[data-theme="dark"] .theme-toggle .icon-sun { opacity: 0; transform: rotate(90deg); }
+[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; transform: rotate(0); }
+[data-theme="dark"] .profile-photo { border-color: var(--border); }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+  <span class="icon-sun">☀</span>
+  <span class="icon-moon">☽</span>
+</button>
+
+<div class="page">
+
+  <!-- Profile -->
+  <div class="profile">
+    <img src="https://github.com/omerarslan0.png" alt="Ömer Arslan" class="profile-photo">
+    <div class="profile-info">
+      <h1>Ömer Arslan</h1>
+      <div class="profile-title">Full-Stack Developer</div>
+      <div class="profile-links">
+        <a href="mailto:omer57763@gmail.com"><span class="link-icon">✉</span> omer57763@gmail.com</a>
+        <a href="https://github.com/omerarslan0" target="_blank"><span class="link-icon">⌘</span> github.com/omerarslan0</a>
+        <a href="https://www.npmjs.com/~sehawq" target="_blank"><span class="link-icon">◆</span> npmjs.com/~sehawq</a>
+        <span style="color:var(--text-muted)"><span class="link-icon" style="color:var(--text-faint)">◉</span> Turkey</span>
+      </div>
+      <div class="profile-follow">
+        <a href="https://github.com/omerarslan0" target="_blank">GitHub</a>
+        <a href="https://www.npmjs.com/~sehawq" target="_blank">npm</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="about">
+    <h2>About Me</h2>
+    <p>I'm a full-stack developer from Turkey building developer tools and contributing to open-source infrastructure. I work across the entire stack — from low-level packet capture in Rust to real-time dashboards in Next.js.</p>
+    <p>I'm currently a collaborator on <a href="https://github.com/HKUDS/CLI-Anything">CLI-Anything</a> (20k+ ★) with review and merge access. I've also contributed to <a href="https://github.com/pbatard/rufus">Rufus</a> (35k+ ★) and <a href="https://github.com/ryo-ma/github-profile-trophy">github-profile-trophy</a> (6k+ ★).</p>
+  </div>
+
+  <!-- OSS -->
+  <div class="section">
+    <h2>Open Source Contributions</h2>
+    <table class="oss-table">
+      <tr>
+        <td class="oss-name-cell">
+          <a href="https://github.com/HKUDS/CLI-Anything" target="_blank">HKUDS/CLI-Anything</a>
+          <div class="oss-desc-text">Making all software agent-native. Active collaborator with review & merge access.</div>
+        </td>
+        <td><span class="oss-badge">Collaborator</span></td>
+        <td class="oss-stars">★ 20k+</td>
+      </tr>
+      <tr>
+        <td class="oss-name-cell">
+          <a href="https://github.com/pbatard/rufus/commit/6d12577" target="_blank">pbatard/rufus</a>
+          <div class="oss-desc-text">The reliable USB formatting utility. Fixed UI controls state when no image is selected.</div>
+        </td>
+        <td><span class="oss-badge">Contributor</span></td>
+        <td class="oss-stars">★ 35k+</td>
+      </tr>
+      <tr>
+        <td class="oss-name-cell">
+          <a href="https://github.com/ryo-ma/github-profile-trophy/pulls?q=author%3Aomerarslan0" target="_blank">ryo-ma/github-profile-trophy</a>
+          <div class="oss-desc-text">GitHub stat trophies. Fixed content-type headers and password-less Redis auth.</div>
+        </td>
+        <td><span class="oss-badge">Contributor</span></td>
+        <td class="oss-stars">★ 6k+</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Projects -->
+  <div class="section">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3><a href="https://github.com/omerarslan0/AetherLens" target="_blank">AetherLens</a></h3>
+      <p>Real-time network traffic analysis and security anomaly detection platform. Detects port scans, protocol mismatches, and suspicious outbound connections in real-time.</p>
+      <div class="project-arch-grid">
+        <div class="arch-item">
+          <strong>Rust</strong>
+          <span>core-engine</span>
+        </div>
+        <div class="arch-item">
+          <strong>C# / .NET 8</strong>
+          <span>api-server</span>
+        </div>
+        <div class="arch-item">
+          <strong>TypeScript</strong>
+          <span>web-dashboard</span>
+        </div>
+        <div class="arch-item">
+          <strong>Proto</strong>
+          <span>shared/proto</span>
+        </div>
+      </div>
+      <div class="project-tech">
+        <span>Rust</span><span>.NET 8</span><span>gRPC</span><span>SignalR</span><span>Next.js</span><span>Docker</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stack -->
+  <div class="section">
+    <h2>Tech Stack</h2>
+    <div class="stack-grid">
+      <div class="stack-cat">Languages</div>
+      <div class="stack-val">TypeScript, Rust, C#, Python</div>
+      <div class="stack-cat">Frontend</div>
+      <div class="stack-val">React, Next.js, Tailwind CSS</div>
+      <div class="stack-cat">Backend</div>
+      <div class="stack-val">Node.js, .NET 8, gRPC, SignalR</div>
+      <div class="stack-cat">Data</div>
+      <div class="stack-val">MongoDB, PostgreSQL, Redis</div>
+      <div class="stack-cat">Infrastructure</div>
+      <div class="stack-val">Docker, GitHub Actions, Linux</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>© 2025 Ömer Arslan</span>
+  </div>
+
+</div>
+
+<script>
+const toggle = document.getElementById('themeToggle');
+const saved = localStorage.getItem('theme');
+
+if (saved === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+toggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+</script>
+
+</body>
+</html>
